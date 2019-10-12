@@ -8,16 +8,14 @@ fi
 httpd="busybox-extras httpd"
 repo=$1
 hcount=$(grep hook /etc/passwd | wc -l) #heh
-u=$3
+u=$2
 : ${u:=hook$hcount}
-guser=$2
-: ${guser:=$u}
 port=`expr 8080 + $hcount`
 if [ "$(whoami)" !=  "$u" ]; then
 	echo "create user $u..."
 	#I don't really like putting sudo in a shell script but whatever
 	sudo adduser $u
-	sudo su $u -c "$0 $repo $guser $u"
+	sudo su $u -c "$0 $repo $u"
 	exit $?
 fi
 if [ "$(whoami)" != "$u" ]; then
@@ -40,11 +38,6 @@ cat /dev/null | env -i "cd ~/doc && git pull && ./ci"
 EOF
 chmod +x www/cgi-bin/hook
 git clone $repo doc
-if [ -n $guser ]; then
-	echo key is  
-	cat ~/.ssh/id_rsa.pub
-	echo
-fi
 echo -n "hook is http://"
 hostname -f | tr -d '\n'
 echo ":$port/cgi-bin/hook"

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		:root {
+			--bg: #EED;
+			--fg: #444;
+			--hg: #040;
+		}
+		body{
+			line-height:1.6;
+			font-size:18px;
+			color:#444;
+			padding:0 0.6em; 
+			background: var(--bg);
+		}
+		p{
+
+			margin: auto;
+			max-width:40em;
+			text-align:justify;
+		}
+		h1,h2,h3{line-height:1.2;text-align:center;}
+		ul{ width:-160em; margin-left:0%;}
+		li{
+			list-style-type:none;
+			animation-name: slidein;
+			/*animation-iteration-count: infinite;*/
+			animation-fill-mode: both;
+		}
+		nav li { display: inline-block;}
+		a{color:var(--hg);}
+		svg{display:block;margin-left:auto;margin-right:auto;width:7em;height:7em;fill: var(--hg);}
+		footer{color:lightgrey;}
+		img{display:block;margin-left:auto; margin-right:auto;;width:7em; height:7em;}
+		li:nth-child(1) { animation-duration: 1s; }
+		li:nth-child(2) { animation-duration: 2s; }
+		li:nth-child(3) { animation-duration: 3s; }
+		li:nth-child(4) { animation-duration: 4s; }
+		li:nth-child(5) { animation-duration: 5s; }
+		li:nth-child(6) { animation-duration: 6s; }
+		li:nth-child(7) { animation-duration: 7s; }
+		li:nth-child(8) { animation-duration: 8s; }
+		li:nth-child(n+8) { animation-duration: 8s; }
+		@keyframes slidein{ 
+			from {
+				margin-left: 100%;
+			}
+			20% {
+				margin-left: 20%;
+			}
+			60%{
+				margin-left: 34%;
+			}
+			to {
+				margin-left: 35%;
+			}
+		}
+	</style>
+	<title>{% if page.title %}{{ page.title }} - {% endif %}{{ config.site_name }}</title>
+	</head>
+	<body>
+	{% if page.is_homepage %}
+		<svg>
+		<defs>
+			<g id="left">
+				<rect x="0%" y="0%" width="3%" height="10%" />
+				<rect x="-10%" y="10%" width="13%" height="3%" />
+				<rect x="-10%" y="16%" width="13%" height="3%" />
+				<rect x="0%" y="16%" width="3%" height="30%" />
+			</g>
+		</defs>
+		<use href="#left" x="46%" y="0" />
+		<use href="#left" x="-54%" y="0" transform="scale(-1,1)"/>
+		</svg>
+	{% endif %}
+	{{ page.content }}
+	<footer>
+	{% if nav|length>1 %}
+	<hr><nav><ul>
+		{% for nav_item in nav %}
+		<li>
+		 <a href="{{ nav_item.url|url }}">{{ nav_item.title }}</a>
+		</li>
+		{% endfor %}
+	</ul></nav>
+	{% endif %}
+	<li><a href="{{ page.edit_url }}">&#x270F;</a></li>
+	</body>
+	Copyright 2019 Evergreen Comunity Church</footer>
+</html>
+

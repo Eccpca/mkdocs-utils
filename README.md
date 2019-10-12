@@ -4,6 +4,8 @@ This is to be use for moving the site or setting up new ones.
 
 # How
 
+If you're moving the site the only thing you need to do is set up the webhook on a new machine and reconfigure the proxy. You can ignore the other sections.
+
 ## Webhooks
 
 The webhook is how we notify mkdocs to regenerate the static HTML for the site.

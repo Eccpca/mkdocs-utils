@@ -1,10 +1,7 @@
 #!/bin/bash
-#There is probably something wrong here, you probably should not run it.
 if [ -z $1 ]; then
 	echo
 	echo "			Need Repository Path"
-	echo "  You can also add a second parameter to be used as a git username."
-	echo " If you dont provide this then provisions will NOT be made for pushing."
 	echo
 	exit 1
 fi
@@ -29,11 +26,6 @@ if [ "$(whoami)" != "$u" ]; then
 	exit 1
 fi
 cd ~
-if [ -n $guser ]; then
-	cat /dev/zero | ssh-keygen -q -N "" #assume the defaults are secure
-	git config --global user.name "$guser"
-	git config --global url.ssh://git@github.com/.insteadOf https://github.com/
-fi
 mkdir -p www/cgi-bin
 cat >www/cgi-bin/hook <<EOF
 #!/bin/bash
